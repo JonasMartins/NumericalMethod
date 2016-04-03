@@ -6,6 +6,13 @@ import br.com.dc.ufc.NewtonCotes.NewtonCotes;
 
 public class Main {
 
+	/*
+	 * 	ALSO FIND AT : https://github.com/JonasMartins/NumericalMethods.git
+	 * 
+	 * 
+	 * 
+	 * */
+	
 	public static void main(String[] args) {
 		
 		int option=0;

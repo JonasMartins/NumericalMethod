@@ -7,7 +7,7 @@ import br.com.dc.ufc.NewtonCotes.NewtonCotes;
 public class Main {
 
 	public static void main(String[] args) {
-		/*
+		
 		int option=0;
 		double error=0;
 		
@@ -21,12 +21,10 @@ public class Main {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		NewtonCotes closedMethods = new NewtonCotes(option,error);	
-			
-			*/
 		
-		NewtonCotes closedMethods = new NewtonCotes(1,1);
+		//NewtonCotes closedMethods = new NewtonCotes(2,0.01); //tests
 		
+		NewtonCotes closedMethods = new NewtonCotes(option,error);
 		closedMethods.run();
 		
 	}

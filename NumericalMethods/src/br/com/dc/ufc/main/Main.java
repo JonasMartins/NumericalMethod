@@ -3,6 +3,7 @@ package br.com.dc.ufc.main;
 import javax.swing.JOptionPane;
 
 import br.com.dc.ufc.NewtonCotes.NewtonCotes;
+import br.com.dc.ufc.NewtonCotesOpen.NewtonCotesOpen;
 
 public class Main {
 
@@ -31,8 +32,12 @@ public class Main {
 		
 		//NewtonCotes closedMethods = new NewtonCotes(2,0.01); //tests
 		
+		@SuppressWarnings("unused")
 		NewtonCotes closedMethods = new NewtonCotes(option,error);
-		closedMethods.run();
+		//closedMethods.run(); // secçã anterior...
+		
+		NewtonCotesOpen openMethods = new NewtonCotesOpen(option,error);
+		openMethods.run();
 		
 	}
 

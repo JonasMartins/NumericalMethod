@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 public class NewtonCotes {
 
 	private double error;
-	private double a = -0.3;
-	private double b = 3.7;
+	private double a = -0.1;
+	private double b = 3.0;
 	private int order, n;
 	double h = (b - a);
 	private double limit = 0;
@@ -51,6 +51,7 @@ public class NewtonCotes {
 			} while (bi < b);
 			integralValue = aux = 0;
 		} while (Math.abs(limit) > error);
+		JOptionPane.showMessageDialog(null, "N turns: " + n);
 		return finalValue;
 	}
 
@@ -75,6 +76,7 @@ public class NewtonCotes {
 			} while (bi < b);
 			integralValue = aux = 0;
 		} while (Math.abs(limit) > error);
+		JOptionPane.showMessageDialog(null, "N turns: " + n);
 		return finalValue;
 	}
 	public double ThreeEightSimpson() {
@@ -99,6 +101,7 @@ public class NewtonCotes {
 			} while (bi < b);
 			integralValue = aux = 0;
 		} while (Math.abs(limit) > error);
+		JOptionPane.showMessageDialog(null, "N turns: " + n);
 		return finalValue;
 	}
 

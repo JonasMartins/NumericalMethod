@@ -2,6 +2,7 @@ package br.com.dc.ufc.main;
 
 import javax.swing.JOptionPane;
 
+import br.com.dc.ufc.GaussLegendre.GaussLegendre;
 import br.com.dc.ufc.NewtonCotes.NewtonCotes;
 import br.com.dc.ufc.NewtonCotesOpen.NewtonCotesOpen;
 
@@ -35,9 +36,12 @@ public class Main {
 		@SuppressWarnings("unused")
 		NewtonCotes closedMethods = new NewtonCotes(option,error);
 		//closedMethods.run(); // secçã anterior...
-		
+		@SuppressWarnings("unused")
 		NewtonCotesOpen openMethods = new NewtonCotesOpen(option,error);
-		openMethods.run();
+		//openMethods.run(); // secçã anterior...
+		
+		GaussLegendre gaussLeg = new GaussLegendre(1, 2,error, option);
+		gaussLeg.run();
 		
 	}
 

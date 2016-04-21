@@ -1,4 +1,4 @@
-package br.com.dc.ufc.GaussLegendre;
+package br.com.dc.ufc.GaussQuadrature;
 /*
  * 		Implementar e testar as quadraturas de Gauss-Legendre
  *  	para integração de funções. O método que retorna o valor da

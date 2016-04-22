@@ -43,6 +43,13 @@ public class Main {
 		//GaussLegendre gaussLeg = new GaussLegendre(1, 2,error, option);
 		//gaussLeg.run();
 		
+		//GaussHermite gaussHer = new GaussLegendre(option);
+		//gaussHer.run();
+		
+		//GaussLaguerre gaussLag = new GaussLegendre(option);
+		//gaussLag.run();
+		
+		
 	}
 
 }

@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 public class NewtonCotes {
 
 	private double error;
-	private double a = -0.1;
-	private double b = 3.0;
+	private double a = 0;
+	private double b = 1.0;
 	private int order, n;
 	double h = (b - a);
 	private double limit = 0;
@@ -27,7 +27,8 @@ public class NewtonCotes {
 	}
 
 	public double fx(double x) {
-		return Math.pow(x, 5) - 2 * (Math.pow(x, 3)) + 4 * x + 5; // função
+		//return Math.pow(x, 5) - 2 * (Math.pow(x, 3)) + 4 * x + 5; // função
+		return Math.pow(x,3) + 2*(Math.pow(x, 2)) - 10 * x;
 		// return Math.pow(x, 3) - 2 * (Math.pow(x, 2)) + x; // função mais
 		// simples
 	}
@@ -47,11 +48,12 @@ public class NewtonCotes {
 				ai = a + (n - 1) * (h / n);
 				integralValue += aux;
 				finalValue = integralValue;
-				// System.out.println("final: " + integralValue);
+				System.out.println("final: " + integralValue);
 			} while (bi < b);
 			integralValue = aux = 0;
 		} while (Math.abs(limit) > error);
-		JOptionPane.showMessageDialog(null, "N turns: " + n);
+		//JOptionPane.showMessageDialog(null, "N turns: " + n);
+		System.out.println( "N turns: " + n);
 		return finalValue;
 	}
 
@@ -108,7 +110,8 @@ public class NewtonCotes {
 	public void run() {
 		switch (order) {
 		case 1:
-			JOptionPane.showMessageDialog(null, "Integral: " + TrapeziumMethod());
+			//JOptionPane.showMessageDialog(null, "Integral: " + TrapeziumMethod());
+			System.out.println("Integral: " + TrapeziumMethod());
 			break;
 		case 2:
 			JOptionPane.showMessageDialog(null, "Integral: " + OneEightSimpson());

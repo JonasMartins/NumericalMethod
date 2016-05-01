@@ -2,7 +2,7 @@ package br.com.dc.ufc.ExponencialMethod;
 
 public class DoubleExponencial{
 
-  private double a,b,tolerance,currentArea=0, nextArea=0,ai,bi,a2i,x;
+  private double a,b,tolerance,currentArea=0, nextArea=0,ai,bi;
   private final double m = 9*(Math.pow(10,15)); //example of N
   private final double s = Math.log( (Math.log(4*m) * (2/Math.PI)));
 
@@ -41,7 +41,6 @@ public class DoubleExponencial{
       currentArea = nextArea;
       ai = (-s); // parte de -s
       do {
-        x = (h / n) / 2;
         bi = ai + (h / n);
         n++;
         aux += (bi - ai) / 2 * (fx(xs(ai)) + fx(xs(bi))); // formula f(s(x))

@@ -53,6 +53,11 @@ public class Main {
 		//GaussChebyshev gaussChe = new GaussChebyshev(option);
 		//gaussChe.run();
 
+
+		DoubleExponencial de = new DoubleExponencial(-1,1,0.001);
+    de.run();
+
+
 	}
 
 }

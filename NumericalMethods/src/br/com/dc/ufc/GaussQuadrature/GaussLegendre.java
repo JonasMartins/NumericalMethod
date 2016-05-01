@@ -46,8 +46,8 @@ public class GaussLegendre {
 	
 	
 	public double fx(double x) {
-		return Math.pow(x, 9)*5 - Math.pow(x, 5) + Math.pow(x, 3) - 10;
-		//return 1/x;
+		//return Math.pow(x,3) + 2*(Math.pow(x, 2)) - 10 * x;
+		return Math.pow(x,2);
 	}
 	
 	public double tx(double t){
@@ -55,7 +55,7 @@ public class GaussLegendre {
 		return ((xb-xa)*t + (xb+xa))/2;
 	}
 	
-	public double tx(){
+	public double t_x(){
 		return (xb-xa)/2;
 		
 	}
@@ -68,24 +68,23 @@ public class GaussLegendre {
 	}
 	
 	public double threePoints(){
-		 
-		integralValue = (fx(tx(-0.7745966)) * 0.5555) + (fx(tx(0)) * 0.8888) + ( fx(tx(0.7745966) * 0.5555));
-		
-		return integralValue;
+	
+		integralValue = (fx(tx(-0.7745966))* 0.5555) + (fx(tx(0))*0.8888) + (fx(tx(0.7745966))* 0.5555);
+		return t_x() * integralValue;
 	}
 	public double fourPoints(){
 		 
 		integralValue = (fx(tx(-0.861136)) * 0.3478) + (fx(tx(-0.339981)) * 0.6521) + 
 				(fx(tx(0.861136)) * 0.3478) + (fx(tx(0.339981)) * 0.6521);
 		
-		return integralValue;
+		return t_x() * integralValue;
 	}
 	public double fivePoints(){
 		 
 		integralValue = (fx(tx(-0.906179)) * 0.2369) + (fx(tx(-0.538469)) * 0.4786) + 
 				(fx(tx(0)) * 0.5688) + (fx(tx(0.906179)) * 0.2369) + (fx(tx(0.538469)) * 0.4786);
 		
-		return integralValue;
+		return t_x() * integralValue;
 	}
 	
 	public void run() {

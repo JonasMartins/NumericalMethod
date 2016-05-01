@@ -12,9 +12,8 @@ public class GaussLaguerre{
   }
 
   public double fx(double x) {
-    return Math.sin(x);
+	  return Math.pow(x,3) + 2*(Math.pow(x, 2)) - 10 * x;
   }
-
 
   public double twoPoints(){
       return (fx(0.58578) * 0.85355)

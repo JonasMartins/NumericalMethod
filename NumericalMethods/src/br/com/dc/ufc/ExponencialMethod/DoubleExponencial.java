@@ -34,32 +34,31 @@ public class DoubleExponencial{
 
   /*  AGORA, FAZER INTEGRAL DE -s ATÉ s DE FX(S) COM ALGUM MÉTODO DE INTEGRAÇÃO ANTERIOR  */
   public double TrapeziumMethod() {
-    //b=xs(b); // s positivo
-    double h = s+s; // -s e s do gráfico dinossauro.
+
+	double h = s+s; // -s e s do gráfico dinossauro.
     int n = 1; /* diferencial... */
+    ai = (-s); // parte de -s
     do {
       currentArea = nextArea;
-      ai = (-s); // parte de -s
       do {
-        bi = ai + (h / n);
-        n++;
-        aux += (bi - ai) / 2 * (fx(xs(ai)) + fx(xs(bi))); // formula f(s(x))
-        ai = a + (n - 1) * (h / n);
-        integralValue += aux;
-        finalValue = integralValue;
-      } while (bi < s);
+			bi = ai + (h / n);
+			aux = Math.abs( (bi - ai) / 2 * (fx(xs(ai)) + fx(xs(bi))) );
+			ai = bi;
+			integralValue += Math.abs(aux);
+			finalValue = integralValue;
+		} while (bi < b);
       nextArea = finalValue;
-      System.out.println("-> "+finalValue);
-      integralValue = aux = 0;
-      if (n==30)
-        tolerance = 1000;
-    } while ( Math.abs(nextArea - currentArea) > tolerance); //limite de erro (Math.abs(nextArea - currentArea) > tolerance )
-    System.out.println("N turns: " + n);
+      n++;
+		ai = a;
+		nextArea = finalValue;
+		integralValue = aux = 0;
+	} while (Math.abs(nextArea-currentArea)>tolerance);
+    System.out.println("N turns: " + (n-1));
     System.out.println("tolerance: " + Math.abs(nextArea - currentArea));
     System.out.println("\n");
     return finalValue;
   }
-
+  
   public void run(){
 
     double dxs_ds = (b-a)/4 * (Math.PI); // dx(s)/ds .....
@@ -68,10 +67,6 @@ public class DoubleExponencial{
     System.out.println("-s "+(s*(-1)));
     System.out.println("+s "+s);
 
-    System.out.println("Variação das Áreas: "+"\n");
-
-
-    //System.out.println("Integral: "+ dxs_ds * Math.round(OneEightSimpson())) ;
     System.out.println("Integral: "+ dxs_ds *TrapeziumMethod()) ;
   }
 

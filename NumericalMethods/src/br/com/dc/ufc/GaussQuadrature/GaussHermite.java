@@ -12,7 +12,7 @@ public class GaussHermite{
   }
   
   public double fx(double x) {
-    return Math.pow(x, 2);
+	  return Math.pow(x,3) + 2*(Math.pow(x, 2)) - 10 * x;
   }
   
   

@@ -2,9 +2,7 @@ package br.com.dc.ufc.main;
 
 import javax.swing.JOptionPane;
 
-import br.com.dc.ufc.ExponencialMethod.DoubleExponencial;
-import br.com.dc.ufc.NewtonCotes.NewtonCotes;
-import br.com.dc.ufc.NewtonCotesOpen.NewtonCotesOpen;
+import br.com.dc.ufc.GaussQuadrature.GaussLegendre;
 
 public class Main {
 
@@ -32,16 +30,17 @@ public class Main {
 			e.printStackTrace();
 		}
 		 
+		GaussLegendre gaussLeg = new GaussLegendre(1, 9,error, option);
+		gaussLeg.run();
 		
+		/*
 		
 		//NewtonCotes closedMethods = new NewtonCotes(2,0.01); //tests
 
-		//@SuppressWarnings("unused")
 		NewtonCotes closedMethods = new NewtonCotes(option,error);
 		
-		closedMethods.run(); // secçã anterior...
-		
-		
+		//closedMethods.run(); // secçã anterior...
+				
 		@SuppressWarnings("unused")
 		NewtonCotesOpen openMethods = new NewtonCotesOpen(option,error);
 		//openMethods.run(); // secçã anterior...
@@ -59,10 +58,11 @@ public class Main {
 		//GaussChebyshev gaussChe = new GaussChebyshev(option);
 		//gaussChe.run();
 
-		@SuppressWarnings("unused")
+		
 		DoubleExponencial de = new DoubleExponencial(-1,1,0.001);
 		//de.run();
-
+		
+		*/
 
 	}
 

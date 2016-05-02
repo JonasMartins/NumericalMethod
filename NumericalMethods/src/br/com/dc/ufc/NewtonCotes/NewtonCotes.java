@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 public class NewtonCotes {
 
 	private double error;
-	private double a = 0;
-	private double b = 1.0;
+	private double a = -1;
+	private double b = 1;
 	private int order, n;
 	private double h = (b - a);
 	private double integralValue = 0, finalValue = 0, currentArea=0, nextArea=0;
@@ -21,9 +21,9 @@ public class NewtonCotes {
 
 	public double fx(double x) {
 		//return Math.pow(x, 5) - 2 * (Math.pow(x, 3)) + 4 * x + 5; // função
-		return Math.pow(x,3) + 2*(Math.pow(x, 2)) - 10 * x;
+		//return Math.pow(x,3) + 2*(Math.pow(x, 2)) - 10 * x;
 		// return Math.pow(x, 3) - 2 * (Math.pow(x, 2)) + x; // função mais
-		// simples
+		return 1 / (1 + (25 * Math.pow(x, 2)));
 	}
 
 	public double TrapeziumMethod() {

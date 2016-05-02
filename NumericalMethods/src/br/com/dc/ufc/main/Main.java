@@ -1,8 +1,6 @@
 package br.com.dc.ufc.main;
 
-import javax.swing.JOptionPane;
-
-import br.com.dc.ufc.GaussQuadrature.GaussLegendre;
+import br.com.dc.ufc.ExponencialMethod.SimpleExponencial;
 
 public class Main {
 
@@ -15,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		/*
 		int option=0;
 		double error=0;
 
@@ -31,9 +30,12 @@ public class Main {
 		}
 		 
 		GaussLegendre gaussLeg = new GaussLegendre(1, 9,error, option);
-		gaussLeg.run();
+		//gaussLeg.run();
 		
-		/*
+		SimpleExponencial de = new SimpleExponencial(-10,10,0.00001);
+		de.run();
+		
+		
 		
 		//NewtonCotes closedMethods = new NewtonCotes(2,0.01); //tests
 
@@ -63,6 +65,12 @@ public class Main {
 		//de.run();
 		
 		*/
+		
+		SimpleExponencial de = new SimpleExponencial(-1,1,0.001);
+		de.run();
+		
+		//NewtonCotesOpen openMethods = new NewtonCotesOpen(1,0.01);
+		//openMethods.run();
 
 	}
 

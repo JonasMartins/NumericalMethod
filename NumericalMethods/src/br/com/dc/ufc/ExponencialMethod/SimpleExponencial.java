@@ -1,12 +1,12 @@
 package br.com.dc.ufc.ExponencialMethod;
 
-public class DoubleExponencial {
+public class SimpleExponencial {
 
 	private double a, b, tolerance, currentArea = 0, nextArea = 0, s, n = 1, h;
 
 	private double aux = 0, finalValue, integralValue = 0;
 
-	public DoubleExponencial(double a, double b, double tolerance) {
+	public SimpleExponencial(double a, double b, double tolerance) {
 		this.a = a;
 		this.b = b;
 		this.tolerance = tolerance;
@@ -18,18 +18,18 @@ public class DoubleExponencial {
 	}
 
 	public double ws(double s) {
-		return (0.5 * Math.PI * Math.cosh(s)) / Math.pow(Math.cosh(0.5 * Math.PI * Math.sinh(s)), 2);
+		return 1 / Math.pow(Math.cosh(s), 2);
 	}
 
 	public double xs(double s) {
-		return (a + b) / 2 + (b - a) / 2 * Math.tanh(((Math.PI) / 2) * Math.sinh(s));
+		return (a + b) / 2 + (b - a) / 2 * Math.tanh(s);
 	}
 
 	/*
 	 * AGORA, FAZER INTEGRAL DE -s ATÉ s DE FX(S) COM ALGUM MÉTODO DE INTEGRAÇÃO
 	 * ANTERIOR
 	 */
-	public double DoubleExponential() {
+	public double SimpleExponential() {
 	  
 	  n=1;
 	  s=a;
@@ -55,7 +55,7 @@ public class DoubleExponencial {
 
 	public void run() {
 
-		System.out.println("Integral: " + DoubleExponential());
+		System.out.println("Integral: " + SimpleExponential());
 	}
 
 }

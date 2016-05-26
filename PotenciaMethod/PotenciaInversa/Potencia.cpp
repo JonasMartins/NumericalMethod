@@ -25,8 +25,10 @@ void Inversa::stopProgram(){
 }
 
 void Inversa::setValues_Default(){
-  unsigned short mat_u[3][3] = {
-    {20,7,9},{7,30,8},{9,8,30}
+  double mat_u[3][3] = {
+       //{20,7,9},{7,30,8},{9,8,30}
+      {3,-0.1,-0.2},{0.1,7,-0.3},{0.3,-0.2,10}
+
   };
   for(i=0;i<m->rows;i++)
     for(j=0;j<m->columns;j++)
@@ -87,12 +89,12 @@ double ** Inversa::aloca( int lin, int col ){
     }
     ret =(double **)malloc( sizeof(double*) * lin );
     if( ret == NULL  ){
-      printf( "Impossivel alocar espaco" );
+      printf( "2Impossivel alocar espaco" );
       exit( 3 );
     }
     ret[0] =(double *)malloc( sizeof(double) * ( lin * col ) );
     if( ret[0] == NULL  ){
-      printf( "Impossivel alocar espaco" );
+      printf( "1Impossivel alocar espaco" );
       exit( 3 );
     }
     for( k=1; k<lin; k++ )

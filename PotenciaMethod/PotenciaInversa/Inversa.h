@@ -27,6 +27,7 @@ public:
   matriz * flipMatrix(matriz *);
   matriz * transposta(matriz *);
   matriz * gaussInversa(matriz *);
+  matriz * gaussBaixo(matriz *);
 
   double ** aloca(int,int);//Famigerada Aloca...
   void showMatriz(matriz *);
@@ -41,6 +42,8 @@ public:
   void savePartialResult(matriz *);
   void normalizePivots();
   void setMatriz(matriz *);
+  void initInve();
+  void backupM();
   matriz * getMatriz();
 
 private:
@@ -51,6 +54,7 @@ private:
 
   double **ret;
   matriz *m;
+  matriz *backup;
   matriz *buffer;
   matriz *mInve;
   matriz *flip;

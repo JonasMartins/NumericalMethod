@@ -75,13 +75,25 @@ matriz * Inversa::flipMatrix(matriz *m){
   return flip;
 }
 
-matriz * Inversa::gaussInversa(matriz *m){
-  double factor, factorInv,aux,auxInve;
-  //matriz *mInve;
+void Inversa::backupM(){
+
+  backup = (matriz*)malloc(sizeof(matriz));
+  backup->columns=backup->rows=m->rows;
+  backup->data=aloca(backup->rows,backup->columns);
+  igualaMatrizes(backup,m);
+
+}
+
+void Inversa::initInve(){
   mInve = (matriz*)malloc(sizeof(matriz));
   mInve->columns=mInve->rows=m->rows;
   mInve->data=aloca(mInve->rows,mInve->columns);
   identityMatriz(mInve);
+}
+
+
+matriz * Inversa::gaussInversa(matriz *m){
+  double factor, factorInv,aux,auxInve;
   int z=0;
   i=j=0;
   do{
@@ -100,50 +112,74 @@ matriz * Inversa::gaussInversa(matriz *m){
     j=i=0;
   }while(z<(m->rows-1));
 
-  /*
-  savePartialResult(mInve); //salvei
-  cout<<"Before: \n";
-  showMatriz(mInve);
-  mInve = flipMatrix(mInve); // inverti
-  cout<<"After: \n";
-  showMatriz(mInve);
-  */
+  return gaussBaixo(m);
+}
+
+matriz * Inversa::gaussBaixo(matriz *m){
+  double factor, factorInv,aux,auxInve;
+  int z=(m->rows-1);
+  i=j=0;
+  do{ //(m->rows-1)
+    for(k=0;k<z;k++){
+      factor=m->data[k][z]/m->data[z][z];
+      for(;j<m->columns;j++){
+          aux = factor * m->data[z][j];
+          auxInve = factor * mInve->data[z][j];
+          aux*=-1;
+          m->data[k][j]+=aux;
+          mInve->data[k][j]+=auxInve;
+      }
+      j=i;
+    }
+    z--;
+    j=i=0;
+  }while(z>=0);
+
   return m;
 }
+
 void Inversa::normalizePivots(){
     double aux;
     for(i=0;i<m->rows;i++){
       aux = 1/m->data[i][i];
       m->data[i][i]*= aux;
-      mInve->data[i][i]*= aux;
+      mInve->data[i][i]*= aux; // também normaliza os pivos da inversa.
     }
 }
 
 void Inversa::run(){
   //showMatriz(m);
+
+  matriz *v;
+  v = (matriz*)malloc(sizeof(matriz));
+  v->rows=3;v->columns=1;
+  v->data = aloca(3,1);
+  v->data[0][0]=1;v->data[1][0]=-2;v->data[2][0]=2;
+
+  backupM(); //keep m
+  initInve();
+
+
+
   gaussInversa(m);
-  //m = flipMatrix(m);
-  //mInve = flipMatrix(mInve);
 
-  showMatriz(m);
+  normalizePivots();
+  printf("\n\n");
+  printf("%s\n\n","MTRIZ A DADA:" );
+  showMatriz(backup);
+  printf("%s\n\n","SUA INVERSA A¹ APROX:" );
   showMatriz(mInve);
+  printf("DEVERIA SER I:\n");
+  printf("%s\n\n","APROX: A¹ x A:" );
+  savePartialResult(times(mInve,backup));
+  showMatriz(buffer);
+  printf("%s\n","APLICANDO POTENCIA NESSA MATRIZ APROX INVERSA:\n\n" );
+  printf("vetor inicial aleatório:\n");
+  showMatriz(v);
+  printf("============ INICIO ===========\n");
+  potenciaRegular(buffer,v,0.01);
+  printf("============  FIM  ===========\n");
 
-  /*
-  gaussInversa(m);
-  m = flipMatrix(m);
-  mInve = flipMatrix(mInve);
-
-  normalizePivots();//both;
-
-  showMatriz(m);
-  showMatriz(mInve);
-  */
-  //gaussInversa(m);
-  //m = flipMatrix(m);
-//  showMatriz(m);
-//  showMatriz(mInve);
-  //showMatriz(buffer);
-  //showMatriz(flipMatrix(buffer));
 
 }
 

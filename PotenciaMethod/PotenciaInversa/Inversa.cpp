@@ -16,7 +16,6 @@ void Inversa::setMatriz(matriz *mm){
 matriz * Inversa::getMatriz(){
   return m;
 }
-
 // recebe um vetor qualquer e retorna o valor normalizado
 matriz * Inversa::normaEuclidiana(matriz *m){
   double norma=0;

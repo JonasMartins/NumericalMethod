@@ -24,13 +24,11 @@ matriz * Holseholder::normaEuclidiana(matriz *m){
     norma+=pow(m->data[0][i],2);
   }
   norma = sqrt(norma);
-
   for(i=0;i<m->rows;i++){
     m->data[0][i]/=norma;
   }
   return m;
 }
-
 void Holseholder::savePartialResult(matriz *m){
 
   buffer = (matriz*)malloc(sizeof(matriz));
@@ -41,14 +39,14 @@ void Holseholder::savePartialResult(matriz *m){
       buffer->data[j][i]=m->data[j][i];
 }
 void Holseholder::run(){
-
   backupM(); //keep m
   printf("\n\n");
   printf("%s\n\n","MTRIZ A DADA:" );
   showMatriz(backup);
   printf("============ INICIO ===========\n");
-  triDiagonalize();
-  //triDiagonalize();
+  generateIdentity();// initialize identity, and anothers
+  triDiagonalize(1,0);
+  triDiagonalize(2,1);
   printf("============  FIM  ===========\n");
 
 }
@@ -88,36 +86,34 @@ void Holseholder::generateIdentity(){// keep I in memory
   n->data=aloca(n->rows,n->columns);
 }
 
-matriz * Holseholder::triDiagonalize(){
+void Holseholder::triDiagonalize(int l, int k){
 
-  savePartialResult(getMatriz());// salvando A em buffer.
-  generateIdentity();// initialize identity, and anothers
-  identityMatriz(h);// h inicia com a identidade
-  l=k=1;
+  //savePartialResult(getMatriz());// salvando A em buffer.
+  //identityMatriz(h);// h inicia com a identidade
   for(i=0;i<v->rows;i++){
     v->data[i][0]=n->data[i][0]=0;}
   for(i=l+1;i<v->rows;i++){
-    v->data[i][0]=n->data[i][0]=m->data[i][0];}
-  do{
-     holseholderQH(v,n,l);// getting qh
-     //igualaMatrizes(h,times(h,qh));
-     showMatriz(qh);
-     //igualaMatrizes(times(m,qh),m);
-     //igualaMatrizes(m,times(m,qh));
-     k++;
-  }while(k<2);
+    v->data[i][0]=n->data[i][0]=m->data[i][k];}
+   holseholderQH(v,n,l);// getting qh
+   igualaMatrizes(m,times(qh,times(m,qh)));
+   showMatriz(m);
 }
 void Holseholder::holseholderQH(matriz *v,matriz *n,int h){
 
-  double v_comp=0;
+  v_comp=0;
+  //printf("### v:\n");
+  //showMatriz(transposta(v));
   for(i=0;i<v->rows;i++)
     v_comp+=pow(v->data[i][0],2);
-
   v_comp = sqrt(v_comp);// comprimento de v
   n->data[h+1][0]=v->data[h+1][0]-v_comp;
   n->data[h+1][0]*=(-1);
+  //printf("v_comp: %f\n",v_comp);
+  //printf("### n:\n");
+  //showMatriz(transposta(n));
   n=normaEuclidiana(n);
   //showMatriz(n);
+  //printf("### n:\n");
   //showMatriz(transposta(n));
   //showMatriz(timesTwoVectors(n,transposta(n)));
   igualaMatrizes(qh,subtraction(identidade,timesEscalar(2,timesTwoVectors(n,transposta(n)))));

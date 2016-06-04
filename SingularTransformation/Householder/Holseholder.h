@@ -36,7 +36,7 @@ public:
   void stopProgram();
   void backupM();
   void setMatriz(matriz *);
-  matriz * triDiagonalize();
+  void triDiagonalize(int, int);
   void holseholderQH(matriz *,matriz *,int);
   void run();
   void generateIdentity();
@@ -73,6 +73,7 @@ private:
   unsigned short k;
   unsigned short l;
 
+  double v_comp;
   double **ret;
   matriz *m;
   matriz *backup;

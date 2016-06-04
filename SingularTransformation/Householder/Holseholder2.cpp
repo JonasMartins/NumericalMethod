@@ -129,15 +129,15 @@ matriz * Holseholder::subtraction(matriz *m,matriz *n){
 
 void Holseholder::setValues_Default(){
 
-  double mat_u[5][5] = {
-    //{4,2,2,1},{2,-3,1,1},{2,1,3,1},{1,1,1,2}
-
+  double mat_u[4][4] = {
+    {4,2,2,1},{2,-3,1,1},{2,1,3,1},{1,1,1,2}
+    /*
     {44,23,23,11,20},
     {23,-38,16,18,-12},
     {23,16,13,45,-10},
     {11,18,45,22,-14},
     {20,-12,-10,-14,45}
-
+    */
   };
   for(i=0;i<m->rows;i++)
     for(j=0;j<m->columns;j++)

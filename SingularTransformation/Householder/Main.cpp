@@ -16,8 +16,8 @@ int main(int argc,char **argv){
 
   matriz *m;
   m = (matriz*)malloc(sizeof(matriz));
-  m->rows = 5;
-  m->columns = 5;
+  m->rows = 4;
+  m->columns = 4;
   Holseholder matriz(m);
 
   matriz.setValues_Default();
@@ -26,3 +26,10 @@ int main(int argc,char **argv){
 
   return EXIT_SUCCESS;
 }
+/*
+1 0 0 0
+0 1 0 0
+0 0 0.8944 -0.4472
+0 0 -0.4472 -0.8944
+
+*/

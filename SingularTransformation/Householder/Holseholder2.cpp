@@ -113,70 +113,46 @@ matriz * Holseholder::transposta(matriz *m){
         transposta->data[j][i]=m->data[i][j];
   return transposta;
 }
+void Holseholder::multiplyByMinusOne(matriz *m){
+  for(i=0;i<m->rows;i++)
+    for(j=0;j<m->columns;j++)
+      m->data[i][j]*=(-1);
+}
+
 void Holseholder::stopProgram(){
   printf("k = 20, PROVAVELMENTE NÃO CONVERGE, TENTE OUTRO VETOR INICIAL V, OU UMA TOLERANCIA MENOR.\n");
   exit(0);
 }
+// apenas para matrizes vetores!!! ou seja este sempre será o vetor q
 matriz * Holseholder::subtraction(matriz *m,matriz *n){
   difference = (matriz*)malloc(sizeof(matriz));
-  difference->rows=difference->columns=m->rows;
+  difference->rows=m->rows;
+  difference->columns=1;
   difference->data=aloca(difference->rows,difference->columns);
   for(i=0;i<m->rows;i++)
-    for(j=0;j<m->columns;j++)
-      difference->data[i][j]=m->data[i][j]-n->data[i][j];
+      difference->data[i][0]=m->data[i][0]-n->data[i][0];
   return difference;
+}
+matriz * Holseholder::sumMatrix(matriz *m,matriz *n){
+  for(i=0;i<m->rows;i++)
+    for(j=0;j<m->columns;j++)
+      m->data[i][j]+=n->data[i][j];
+  return m;
 }
 
 void Holseholder::setValues_Default(){
 
-  double mat_u[4][4] = {
-    {4,2,2,1},{2,-3,1,1},{2,1,3,1},{1,1,1,2}
-    /*
-    {44,23,23,11,20},
-    {23,-38,16,18,-12},
-    {23,16,13,45,-10},
-    {11,18,45,22,-14},
-    {20,-12,-10,-14,45}
-    */
+  double mat_u[5][5] = {
+    //{1,-1,2,2},{-1,2,1,-1},{2,1,3,2},{2,-1,2,1}
+
+    {5,1,2,2,4},
+    {1,1,2,1,0},
+    {2,2,0,2,1},
+    {2,1,2,1,2},
+    {4,0,1,2,4}
+
   };
   for(i=0;i<m->rows;i++)
     for(j=0;j<m->columns;j++)
       m->data[i][j] = mat_u[i][j];
 }
-/*
-void Inversa::potenciaRegular(matriz *m, matriz *v, double tolerance){
-  double lambda=0;
-  double lambdaK;
-  double aux;
-  int h=0;
-  matriz *vk;
-  vk=(matriz*)malloc(sizeof(matriz));
-  vk->rows=v->rows;
-  vk->columns=v->columns;
-  vk->data=aloca(vk->rows,vk->columns);
-
-  do{
-    printf("loop: k = %d.\n",h+1);
-    igualaMatrizes(vk,normaEuclidiana(v)); // normalizando v, e vk <- v normalizado "psi"k
-    igualaMatrizes(v,times(m,vk));  // v+1
-    printf("autovetor:\n");
-    showMatriz(v);
-    printf("autovetor normalizado:\n");
-    showMatriz(normaEuclidiana(v));
-    lambdaK = times(transposta(vk),v)->data[0][0]; // retorna uma matriz 1x1, ou um escalar
-    printf("autovalor:\n");
-    printf("%f\n",lambdaK);
-    aux=fabs(lambdaK-lambda)/fabs(lambdaK);
-    printf("tolerancia: %f\n",aux);
-    lambda = lambdaK;
-    h++;
-    printf("==========================\n");
-    if(h==20)
-      stopProgram();
-  }while(aux>tolerance);
-}
-
-
-// alocando a amatriz dinamicamente
-// multiplicando duas matrizes
-*/

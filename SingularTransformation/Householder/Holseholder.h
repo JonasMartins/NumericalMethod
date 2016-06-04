@@ -26,6 +26,8 @@ public:
   matriz * timesEscalar(double,matriz *);
   matriz * timesTwoVectors(matriz *, matriz *);
   matriz * subtraction(matriz *, matriz *);
+  matriz * sumMatrix(matriz *,matriz *);//subtrai m de n e retorna m
+  void multiplyByMinusOne(matriz *);
   void savePartialResult(matriz *);
   void identityMatriz(matriz *);
   double ** aloca(int,int);
@@ -37,35 +39,9 @@ public:
   void backupM();
   void setMatriz(matriz *);
   void triDiagonalize(int, int);
-  void holseholderQH(matriz *,matriz *,int);
+  void holseholderQH(matriz *,matriz *,int,int);
   void run();
   void generateIdentity();
-  /*
-  matriz * times(matriz *,matriz *);//multiplica duas matrizes
-  matriz * copyMatriz(matriz *,matriz *);
-  matriz * normaEuclidiana(matriz *);
-  matriz * flipMatrix(matriz *);
-  matriz * transposta(matriz *);
-  matriz * gaussInversa(matriz *);
-  matriz * gaussBaixo(matriz *);
-
-  double ** aloca(int,int);//Famigerada Aloca...
-  void showMatriz(matriz *);
-  void igualaMatrizes(matriz *,matriz *);
-  void stopProgram();
-  void identityMatriz(matriz *);
-  void potenciaRegular(matriz *, matriz *, double);
-  void setValues_Default();
-  void run();
-
-
-  void savePartialResult(matriz *);
-  void normalizePivots();
-  void setMatriz(matriz *);
-  void initInve();
-  void backupM();
-  matriz * getMatriz();
-*/
 
 private:
   unsigned short i;
@@ -76,12 +52,15 @@ private:
   double v_comp;
   double **ret;
   matriz *m;
+  matriz *cc;
+  matriz *qq;
   matriz *backup;
   matriz *buffer;
   matriz *qh;
   matriz *h;
   matriz *v;
   matriz *n;
+  matriz *vv;
   matriz *identidade;
   matriz *difference;
 

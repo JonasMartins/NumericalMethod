@@ -97,27 +97,43 @@ matriz * Jacob::timesEscalar(double e,matriz *m){
 }
 // ++++++++++++++++++++++++++++++++++
 void Jacob::setTetaValues(int i, int j, double teta){
-  identity->data[j][j]=identity->data[i][i]=cos(teta*RAD);
-  identity->data[i][j]=identity->data[j][i]=sin(teta*RAD);
-  identity->data[j][i]*=(-1);
-
+  /* old version
+  gamma = 1/teta; //1/tg(2 teta);
+  t = (gamma/fabs(gamma))/fabs(gamma)+sqrt(1+pow(gamma,2));
+  cosseno = 1/sqrt((1+pow(t,2)));
+  seno = cosseno*t;
+  printf("s: %lf, c:%lf, t:%lf\n",seno,cosseno,t);
+  identity->data[j][j]=identity->data[i][i]=cosseno;
+  identity->data[i][j]=identity->data[j][i]=seno;
+  */
+  gamma = atan(teta);
+  gamma/=2;
+  identity->data[j][j]=identity->data[i][i]=cos(gamma);
+  identity->data[i][j]=identity->data[j][i]=sin(gamma);
+  identity->data[i][j]*=(-1);
+  //showMatriz(identity);
 }
 matriz * Jacob::buildMatrixJ(int i, int j){
-  auxTeta = 2*backup->data[i][j]/backup->data[j][j]-backup->data[i][i];
-  teta = atan(2*auxTeta);
+  teta =(2*m->data[i][j])/(m->data[j][j]-m->data[i][i]);
+  //printf("teta: %lf,",teta);
   identityMatriz(identity);
-  identityMatriz(jacob);
+  //identityMatriz(jacob);
   setTetaValues(i,j,teta);
-  igualaMatrizes(jacob,times(jacob,identity));
-  igualaMatrizes(m,(times(transposta(jacob),times(jacob,m))));
+  //showMatriz(transposta(identity));
+  //igualaMatrizes(jacob,times(jacob,identity));
+  /*
+  showMatriz(identity);
+  showMatriz(transposta(identity));
+  showMatriz(times(m,identity));
+  */
+  showMatriz(times(transposta(identity),times(m,identity)));
+  //igualaMatrizes(m,(times(transposta(jacob),times(jacob,m))));
   return identity;
 }
 matriz * Jacob::runJacob(){
 
-  for(k=0;k<m->rows-2;k++){
-    for(l=k+1;l<m->rows-2;l++){
+  for(k=0,l=1;l<m->rows;k++,l++){
       buildMatrixJ(k,l);
-    }
   }
   return m;
 }
@@ -134,15 +150,30 @@ void Jacob::run(){
   generateIdentity(); // aloca matriz identidade, also jacob.
   identityMatriz(jacob);
   printf("============ INICIO ===========\n");
-        //showMatriz(buildMatrixJ(1,2));
-
-          buildMatrixJ(0,1);
-          buildMatrixJ(0,2);
-          buildMatrixJ(0,3);
-          showMatriz(m);
-      //  buildMatrixJ(0,3);
-        //  showMatriz(runJacob());
-        //showMatriz(jacob);
-        //showMatriz(transposta(jacob));
+  (buildMatrixJ(0,1));
+    /*
+    for(k=0;k<m->rows-1;k++){
+      //for(l=k+1;l<m->rows;l++){
+          //k=l+1;
+          buildMatrixJ(k,l);
+        //}
+      }
+      */
+  //showMatriz(m);
   printf("============  FIM  ===========\n");
 }
+/**
+test:
+3
+2 1 1
+1 2 1
+1 1 2
+
+5
+5 1 2 2 4
+1 1 2 1 0
+2 2 0 2 1
+2 1 2 1 2
+4 0 1 2 4
+
+*/

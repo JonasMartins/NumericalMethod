@@ -60,6 +60,10 @@ private:
   matriz *identity;
   matriz *difference;
   matriz *jacob;
-  
+
+  double gamma;
+  double t;
+  double cosseno;
+  double seno;
 
 };

@@ -102,33 +102,37 @@ void Jacob::setTetaValues(int i, int j, double teta){
   t = (gamma/fabs(gamma))/fabs(gamma)+sqrt(1+pow(gamma,2));
   cosseno = 1/sqrt((1+pow(t,2)));
   seno = cosseno*t;
-  printf("s: %lf, c:%lf, t:%lf\n",seno,cosseno,t);
   identity->data[j][j]=identity->data[i][i]=cosseno;
   identity->data[i][j]=identity->data[j][i]=seno;
   */
-  gamma = atan(teta);
-  gamma/=2;
-  identity->data[j][j]=identity->data[i][i]=cos(gamma);
-  identity->data[i][j]=identity->data[j][i]=sin(gamma);
+  teta/=2;
+  identity->data[j][j]=identity->data[i][i]=cos(teta);
+  identity->data[i][j]=identity->data[j][i]=sin(teta);
   identity->data[i][j]*=(-1);
-  //showMatriz(identity);
+
 }
 matriz * Jacob::buildMatrixJ(int i, int j){
-  teta =(2*m->data[i][j])/(m->data[j][j]-m->data[i][i]);
+  if(m->data[i][i]==m->data[j][j]){
+    teta = 0.7853981625; //PI/4
+  }else{
+    // before: teta =(2*m->data[i][j])/(m->data[j][j]-m->data[i][i]);
+    teta =(2*finMaxOffDiagonal(m))/(m->data[j][j]-m->data[i][i]);
+    teta = atan(teta);
+  }
   //printf("teta: %lf,",teta);
   identityMatriz(identity);
   //identityMatriz(jacob);
   setTetaValues(i,j,teta);
-  //showMatriz(transposta(identity));
-  //igualaMatrizes(jacob,times(jacob,identity));
-  /*
-  showMatriz(identity);
-  showMatriz(transposta(identity));
-  showMatriz(times(m,identity));
-  */
-  showMatriz(times(transposta(identity),times(m,identity)));
-  //igualaMatrizes(m,(times(transposta(jacob),times(jacob,m))));
-  return identity;
+  igualaMatrizes(jacob,times(jacob,identity));
+  //showMatriz(jacob);
+  //sacada perfeita...
+  if(j%2==0)
+    igualaMatrizes(identity,times(jacob,times(m,transposta(jacob))));
+  else
+    igualaMatrizes(identity,times(transposta(jacob),times(m,jacob)));
+  igualaMatrizes(m,identity);
+  identityMatriz(jacob);
+  return m;
 }
 matriz * Jacob::runJacob(){
 
@@ -136,6 +140,17 @@ matriz * Jacob::runJacob(){
       buildMatrixJ(k,l);
   }
   return m;
+}
+double Jacob::finMaxOffDiagonal(matriz *m){
+  double max = m->data[0][1];
+  for(i=0;i<m->rows-1;i++){
+    for(j=i+1;j<m->rows;j++){
+        if(fabs(m->data[i][j])>fabs(max)){
+          max=m->data[i][j];
+        }
+    }
+  }
+  return fabs(max);
 }
 
 // ++++++++++++++++++++++++++++++++++
@@ -150,7 +165,20 @@ void Jacob::run(){
   generateIdentity(); // aloca matriz identidade, also jacob.
   identityMatriz(jacob);
   printf("============ INICIO ===========\n");
-  (buildMatrixJ(0,1));
+  showMatriz(buildMatrixJ(0,1));
+  showMatriz(buildMatrixJ(0,2));
+  showMatriz(buildMatrixJ(1,2));
+  showMatriz(buildMatrixJ(0,1));
+  showMatriz(buildMatrixJ(0,2));
+  showMatriz(buildMatrixJ(1,2));
+
+  //showMatriz(buildMatrixJ(0,2));
+  //showMatriz(buildMatrixJ(0,3));
+  //printf("Max: %lf\n",finMaxOffDiagonal(m));
+
+
+  //showMatriz(buildMatrixJ(0,3));
+  //showMatriz(buildMatrixJ(0,4));
     /*
     for(k=0;k<m->rows-1;k++){
       //for(l=k+1;l<m->rows;l++){
@@ -163,11 +191,25 @@ void Jacob::run(){
   printf("============  FIM  ===========\n");
 }
 /**
+obs:. fazer uma versão para matrizes impres e pares
+
 test:
 3
 2 1 1
 1 2 1
 1 1 2
+
+3
+2 -4 1
+-4 5 1
+1 -1 2
+
+
+4
+4 2 2 1
+2 -3 1 1
+2 1 3 1
+1 1 1 2
 
 5
 5 1 2 2 4

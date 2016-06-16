@@ -37,6 +37,7 @@ public:
   void backupM();
   matriz * getMatriz();
   void generateIdentity();
+  double finMaxOffDiagonal(matriz *);
   void identityMatriz(matriz *);
   void setTetaValues(int, int,double);
   matriz * runJacob();

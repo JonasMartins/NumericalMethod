@@ -136,8 +136,10 @@ matriz * Jacob::buildMatrixJ(int i, int j){
 }
 matriz * Jacob::runJacob(){
 
-  for(k=0,l=1;l<m->rows;k++,l++){
-      buildMatrixJ(k,l);
+  for(k=0;k<m->rows-1;k++){
+    for(l=k+1;l<m->rows;l++){
+
+    }
   }
   return m;
 }
@@ -165,30 +167,76 @@ void Jacob::run(){
   generateIdentity(); // aloca matriz identidade, also jacob.
   identityMatriz(jacob);
   printf("============ INICIO ===========\n");
+
+  /* // run para matriz de 5x5
   showMatriz(buildMatrixJ(0,1));
   showMatriz(buildMatrixJ(0,2));
+  showMatriz(buildMatrixJ(0,3));
+  showMatriz(buildMatrixJ(0,4));
   showMatriz(buildMatrixJ(1,2));
-  showMatriz(buildMatrixJ(0,1));
-  showMatriz(buildMatrixJ(0,2));
-  showMatriz(buildMatrixJ(1,2));
+  showMatriz(buildMatrixJ(1,3));
+  showMatriz(buildMatrixJ(1,4));
+  showMatriz(buildMatrixJ(2,3));
+  showMatriz(buildMatrixJ(2,4));
+  showMatriz(buildMatrixJ(3,4));
+  */
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  (buildMatrixJ(2,3));
 
-  //showMatriz(buildMatrixJ(0,2));
-  //showMatriz(buildMatrixJ(0,3));
-  //printf("Max: %lf\n",finMaxOffDiagonal(m));
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  (buildMatrixJ(2,3));
 
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  (buildMatrixJ(2,3));
 
-  //showMatriz(buildMatrixJ(0,3));
-  //showMatriz(buildMatrixJ(0,4));
-    /*
-    for(k=0;k<m->rows-1;k++){
-      //for(l=k+1;l<m->rows;l++){
-          //k=l+1;
-          buildMatrixJ(k,l);
-        //}
-      }
-      */
-  //showMatriz(m);
-  printf("============  FIM  ===========\n");
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  showMatriz(buildMatrixJ(2,3));
+
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  showMatriz(buildMatrixJ(2,3));
+
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  showMatriz(buildMatrixJ(2,3));
+
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  showMatriz(buildMatrixJ(2,3));
+
+  (buildMatrixJ(0,1));
+  (buildMatrixJ(0,2));
+  (buildMatrixJ(0,3));
+  (buildMatrixJ(1,2));
+  (buildMatrixJ(1,3));
+  showMatriz(buildMatrixJ(2,3));
+
+    printf("============  FIM  ===========\n");
 }
 /**
 obs:. fazer uma versão para matrizes impres e pares
@@ -210,6 +258,13 @@ test:
 2 -3 1 1
 2 1 3 1
 1 1 1 2
+
+4
+8 -1 3 -1
+-1 6 2 0
+3 2 9 1
+-1 0 1 7
+
 
 5
 5 1 2 2 4

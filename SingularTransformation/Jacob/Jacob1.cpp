@@ -65,11 +65,12 @@ matriz * Jacob::timesTwoVectors(matriz *m,matriz *n){
 }
 
 matriz * Jacob::times(matriz *m,matriz *n){
+  /*
   //Critério
   if(m->columns!=n->rows){
     printf( "Impossivel multiplicar! Parâmetros incorretos.\n" );
     exit(0);
-  }
+  }*/
   unsigned short q;// outro int
   double buffer=0;
   matriz *product;
@@ -134,11 +135,22 @@ matriz * Jacob::buildMatrixJ(int i, int j){
   identityMatriz(jacob);
   return m;
 }
+//Retorna o erro fora da diagonal... para comparar com a tolerancia
+double Jacob::getError(){
+  unsigned short r,s;
+  errorBuffer=0;
+  for(r=1;r<m->rows;r++){
+    for(s=0;s<r;s++){
+      errorBuffer+=fabs(m->data[r][s]);
+    }
+  }
+  return errorBuffer*2;
+}
 matriz * Jacob::runJacob(){
-
-  for(k=0;k<m->rows-1;k++){
-    for(l=k+1;l<m->rows;l++){
-
+  unsigned short p,q;
+  for(p=0;p<m->rows-1;p++){
+    for(q=p+1;q<m->rows;q++){
+      buildMatrixJ(p,q);
     }
   }
   return m;
@@ -168,75 +180,22 @@ void Jacob::run(){
   identityMatriz(jacob);
   printf("============ INICIO ===========\n");
 
-  /* // run para matriz de 5x5
-  showMatriz(buildMatrixJ(0,1));
-  showMatriz(buildMatrixJ(0,2));
-  showMatriz(buildMatrixJ(0,3));
-  showMatriz(buildMatrixJ(0,4));
-  showMatriz(buildMatrixJ(1,2));
-  showMatriz(buildMatrixJ(1,3));
-  showMatriz(buildMatrixJ(1,4));
-  showMatriz(buildMatrixJ(2,3));
-  showMatriz(buildMatrixJ(2,4));
-  showMatriz(buildMatrixJ(3,4));
-  */
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  (buildMatrixJ(2,3));
+  showMatriz(runJacob());
+  printf("%lf\n",getError());
 
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  (buildMatrixJ(2,3));
+  showMatriz(runJacob());
+  printf("%lf\n",getError());
 
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  (buildMatrixJ(2,3));
+  showMatriz(runJacob());
+  printf("%lf\n",getError());
 
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  showMatriz(buildMatrixJ(2,3));
+  showMatriz(runJacob());
+  printf("%lf\n",getError());
 
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  showMatriz(buildMatrixJ(2,3));
+  showMatriz(runJacob());
+  printf("%lf\n",getError());
 
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  showMatriz(buildMatrixJ(2,3));
-
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  showMatriz(buildMatrixJ(2,3));
-
-  (buildMatrixJ(0,1));
-  (buildMatrixJ(0,2));
-  (buildMatrixJ(0,3));
-  (buildMatrixJ(1,2));
-  (buildMatrixJ(1,3));
-  showMatriz(buildMatrixJ(2,3));
-
-    printf("============  FIM  ===========\n");
+  printf("============  FIM  ===========\n");
 }
 /**
 obs:. fazer uma versão para matrizes impres e pares

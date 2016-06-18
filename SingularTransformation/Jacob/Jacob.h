@@ -43,6 +43,7 @@ public:
   matriz * runJacob();
   matriz * buildMatrixJ(int,int);
   void run();
+  double getError();
 
 private:
   unsigned short i;
@@ -63,8 +64,7 @@ private:
   matriz *jacob;
 
   double gamma;
-  double t;
-  double cosseno;
-  double seno;
+  double errorBuffer;
+
 
 };

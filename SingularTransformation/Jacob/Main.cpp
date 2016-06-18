@@ -15,6 +15,7 @@ int main(int argc,char **argv){
     ./Main Matrix.txt
 
   */
+  double tolerance;
 
   if(argc<2){
     printf("NÚMERO DE PARÂMETROS INVÁLIDOS, POR FAVOR ENTRE COM O NOME DO ARQUIVO COM A MATRIX\n");
@@ -29,7 +30,10 @@ int main(int argc,char **argv){
 
   matriz *m;
   m = (matriz*)malloc(sizeof(matriz));
-  Jacob matriz(m,arq);
+  printf("\n\n\t%s\n","DIGITE A TOLERÂNCIA PARA DECLARAR A MATRIZ COMO DIAGONAL: ");
+  cin >> tolerance;
+
+  Jacob matriz(m,arq,tolerance);
   matriz.run();
   fclose(arq);
 

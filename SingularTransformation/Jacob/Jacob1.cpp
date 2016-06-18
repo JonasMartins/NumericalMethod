@@ -6,8 +6,9 @@
 #include <sstream>
 #include "./Jacob.h"
 
-Jacob::Jacob(matriz *m, FILE *file){
+Jacob::Jacob(matriz *m, FILE *file, double tolerance){
   setMatriz(m);
+  tolerancia=tolerance;// limite
   arq=file;
   fscanf(arq,"%hu",&m->rows);//pegando primeira linha
   m->columns=m->rows;
@@ -126,12 +127,12 @@ matriz * Jacob::buildMatrixJ(int i, int j){
   setTetaValues(i,j,teta);
   igualaMatrizes(jacob,times(jacob,identity));
   //showMatriz(jacob);
-  //sacada perfeita...
   if(j%2==0)
     igualaMatrizes(identity,times(jacob,times(m,transposta(jacob))));
   else
     igualaMatrizes(identity,times(transposta(jacob),times(m,jacob)));
   igualaMatrizes(m,identity);
+  igualaMatrizes(jacob_final,times(jacob_final,jacob));
   identityMatriz(jacob);
   return m;
 }
@@ -166,34 +167,29 @@ double Jacob::finMaxOffDiagonal(matriz *m){
   }
   return fabs(max);
 }
-
 // ++++++++++++++++++++++++++++++++++
 void Jacob::run(){
-
   //rad = PI/180; //:)
-
   backupM(); //keep m
   printf("\n\n");
   printf("%s\n\n","MTRIZ A DADA:" );
   showMatriz(backup);
   generateIdentity(); // aloca matriz identidade, also jacob.
   identityMatriz(jacob);
+  identityMatriz(jacob_final);
   printf("============ INICIO ===========\n");
+  unsigned short iterator=0;
+  do{
+    runJacob();
+    iterator++;
+  }while(getError()>tolerancia);
 
-  showMatriz(runJacob());
-  printf("%lf\n",getError());
-
-  showMatriz(runJacob());
-  printf("%lf\n",getError());
-
-  showMatriz(runJacob());
-  printf("%lf\n",getError());
-
-  showMatriz(runJacob());
-  printf("%lf\n",getError());
-
-  showMatriz(runJacob());
-  printf("%lf\n",getError());
+  printf("Iterações: %d\n", iterator);
+  printf("Acumulo de erro fora da diagonal: %lf\n",getError());
+  printf("%s\n","Matriz diagonal:");
+  showMatriz(m);
+  printf("%s\n","Matriz de Jacob:");
+  showMatriz(jacob_final);
 
   printf("============  FIM  ===========\n");
 }

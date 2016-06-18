@@ -86,6 +86,11 @@ void Jacob::generateIdentity(){
   jacob = (matriz*)malloc(sizeof(matriz));
   jacob->columns=jacob->rows=m->rows;
   jacob->data=aloca(jacob->rows,jacob->columns);
+
+  jacob_final = (matriz*)malloc(sizeof(matriz));
+  jacob_final->columns=jacob_final->rows=m->rows;
+  jacob_final->data=aloca(jacob_final->rows,jacob_final->columns);
+
 }
 void Jacob::identityMatriz(matriz *n){
   for(i=0;i<n->rows;i++)

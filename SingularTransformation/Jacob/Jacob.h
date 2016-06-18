@@ -20,7 +20,7 @@ class Jacob{
 
 public:
 
-  Jacob(matriz *m,FILE *);
+  Jacob(matriz *m,FILE *,double);//biulder......
 
   matriz * times(matriz *,matriz *);
   matriz * transposta(matriz *);
@@ -62,9 +62,10 @@ private:
   matriz *identity;
   matriz *difference;
   matriz *jacob;
+  matriz *jacob_final;
 
   double gamma;
   double errorBuffer;
-
+  double tolerancia;
 
 };

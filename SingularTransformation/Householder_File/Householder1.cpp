@@ -6,9 +6,10 @@
 #include <sstream>
 #include "./Householder.h"
 
-Householder::Householder(matriz *m, FILE *file){
+Householder::Householder(matriz *m, FILE *file/*, FILE *saida*/){
   setMatriz(m);
   arq=file;
+  //arq_saida=saida;
   fscanf(arq,"%hu",&m->rows);//pegando primeira linha
   m->columns=m->rows;
   m->data = aloca(m->rows,m->columns);//alocando a matriz

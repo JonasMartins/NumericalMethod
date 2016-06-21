@@ -13,53 +13,63 @@ typedef struct {
   double **data;
 }matriz;
 
-class Householder{
+#define PI 3.141592653
+#define RAD PI/180
+
+class Jacob{
 
 public:
 
-  Householder(matriz *m,FILE *);
-  matriz * normaEuclidiana(matriz *);
+  Jacob(matriz *m,FILE *,double);//biulder......
+
   matriz * times(matriz *,matriz *);
   matriz * transposta(matriz *);
   matriz * timesEscalar(double,matriz *);
   matriz * timesTwoVectors(matriz *, matriz *);
   matriz * subtraction(matriz *, matriz *);
   matriz * sumMatrix(matriz *,matriz *);//subtrai m de n e retorna m
-  void multiplyByMinusOne(matriz *);
-  void identityMatriz(matriz *);
   double ** aloca(int,int);
-  void showMatriz(matriz *);
-  void igualaMatrizes(matriz *,matriz *);
-  void getMatrixFromFile();
-  matriz * getMatriz();
-  void stopProgram();
-  void backupM();
   void setMatriz(matriz *);
-  void triDiagonalize(int, int);
-  void householderQH(matriz *,matriz *,int,int);
-  void run();
+  void igualaMatrizes(matriz *,matriz *);
+  void multiplyByMinusOne(matriz *);
+  void showMatriz(matriz *);
+  void getMatrixFromFile();
+  void backupM();
+  matriz * getMatriz();
   void generateIdentity();
-  //void saveMatrixFile();
+  double finMaxOffDiagonal(matriz *);
+  void identityMatriz(matriz *);
+  void setTetaValues(int, int);
+  matriz * runJacob();
+  matriz * buildMatrixJ(int,int);
+  void run();
+  double getError();
 
 private:
   unsigned short i;
   unsigned short j;
   unsigned short k;
   unsigned short l;
+  double teta;
+  double auxTeta;
+  //static double rad = PI/180;
+
 
   FILE *arq;
-  //FILE *arq_saida;
-  double v_comp;
   double **ret;
   matriz *m;
-  matriz *cc;
-  matriz *qq;
   matriz *backup;
-  matriz *qh;
-  matriz *h;
-  matriz *v;
-  matriz *n;
-  matriz *vv;
+  matriz *identity;
   matriz *difference;
+  matriz *jacob;
+  matriz *jacob_final;
+
+  double cosseno;
+  double seno;
+  double t;
+  double r;
+
+  double errorBuffer;
+  double tolerancia;
 
 };

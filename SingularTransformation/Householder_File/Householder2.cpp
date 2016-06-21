@@ -148,5 +148,13 @@ void Householder::getMatrixFromFile(){
       fscanf(arq,"%lf",&m->data[i][j]);
 		}
 	}
-
 }
+/*
+void Householder::saveMatrixFile(){
+  for(i=0;i<m->rows;i++){
+		for(j=0;j<m->columns;j++){
+      fprintf(arq_saida,"%lf",m->data[i][j]);
+      fprintf(arq_saida,"%s"," ");
+    }
+  }
+}*/
